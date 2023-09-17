@@ -1,33 +1,7 @@
 #include "binarytree.h"
 #include <iostream>
 
-BinaryTree::TreeNode* BinaryTree::createNode(int value)
-{
-    TreeNode* node = new TreeNode();
-    node->value = value;
-    node->left = nullptr;
-    node->right = nullptr;
-    
-    return node;
-}
-
-BinaryTree::TreeNode* BinaryTree::insert(TreeNode* root, int value)
-{
-    if (root == nullptr)
-    {
-        root = createNode(value);
-    }
-    else if (value <= root->value)
-    {
-        root->left = insert(root->left, value);
-    }
-    else
-    {
-        root->right = insert(root->right, value);
-    }
-}
-
-void BinaryTree::inOrderTraversal(TreeNode* root)
+void BinaryTree::preOrderTraversal(Node* root)
 {
     if(root == nullptr)
     {
@@ -35,8 +9,65 @@ void BinaryTree::inOrderTraversal(TreeNode* root)
     }
     else
     {
-       inOrderTraversal(root->left);
-       std::cout << root->value << " ";
-       inOrderTraversal(root->right);
+        std::cout << root->value << " ";
+        preOrderTraversal(root->left);
+        preOrderTraversal(root->right);
     }
 }
+
+
+void BinaryTree::inOrderTraversal(Node* root)
+{
+    if(root == nullptr)
+    {
+        return;
+    }
+    else
+    {
+        inOrderTraversal(root->left);
+        std::cout << root->value << " ";
+        inOrderTraversal(root->right);
+    }
+}
+
+void BinaryTree::postOrderTraversal(Node* root)
+{
+    if(root == nullptr)
+    {
+        return;
+    }
+    else
+    {
+        postOrderTraversal(root->left);
+        postOrderTraversal(root->right);
+        std::cout << root->value << " ";
+    }
+}
+
+
+
+BinaryTree::Node* BinaryTree::insert(Node* &root, int newValue)
+{
+   if(root == nullptr)
+   {
+     root = new Node;
+     root->value = newValue;
+     root->left = nullptr;
+     root->right = nullptr;
+   }
+   else
+   {
+     if(newValue < root->value)
+     {
+        insert(root->left, newValue);
+     }
+     else if(newValue > root->value)
+     {
+        insert(root->right, newValue);
+     }
+   }
+
+   return root;
+}
+
+
