@@ -17,7 +17,12 @@ class BinaryTree
       void inOrderTraversal(Node* root);
       void preOrderTraversal(Node* root);
       void postOrderTraversal(Node* root);
-      Node* insert(Node* &root, int newValue);
+      void insert(int newValue);
+      Node* insertNode(Node* root, int newValue);
+      void deleteNode(int targetValue);
+      Node* deleteNode(Node* &root, int targetValue);
+      Node* inOrderSuccesor(Node* node);
+
 
       Node* root;
 };
