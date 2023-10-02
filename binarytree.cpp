@@ -1,5 +1,6 @@
 #include "binarytree.h"
 #include <iostream>
+#include <queue>
 
 void BinaryTree::preOrderTraversal(Node* root)
 {
@@ -137,6 +138,45 @@ BinaryTree::Node* BinaryTree::deleteNode(Node* &root, int targetValue)
 
     return root;
     
+}
+
+void BinaryTree::bfs(Node* root)
+{
+   std::queue<Node*> queue;
+
+   if(root)
+   {
+      queue.push(root);
+   }
+
+   int level = 0;
+
+   while(queue.size() > 0)
+   {
+     std::cout << "Level " << level << std::endl;
+     int queueLength = queue.size();
+
+     for(int i = 0; i < queueLength; i++)
+     {
+        Node* curr = queue.front();
+        queue.pop();
+        std::cout << curr->value << " ";
+
+        if(curr->left)
+        {
+            queue.push(curr->left);
+        }
+        if(curr->right)
+        {
+            queue.push(curr->right);
+        }
+     }
+
+     level++;
+     std::cout << std::endl;
+
+   }
+
 }
 
 
